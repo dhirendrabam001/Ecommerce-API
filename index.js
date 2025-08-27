@@ -15,6 +15,7 @@ app.use(express.json());
 
 // api routes
 app.use("/api/user", userRouter);
+app.use("/api/user", userRouter);
 
 
 
