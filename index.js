@@ -2,6 +2,7 @@ const express = require("express");
 require("dotenv").config();
 require("./Database/connection");
 const userRouter = require("./Routes/authRouter");
+const productRouter = require("./Routes/productRouter");
 const app = express();
 
 
@@ -15,7 +16,7 @@ app.use(express.json());
 
 // api routes
 app.use("/api/user", userRouter);
-app.use("/api/user", userRouter);
+app.use("/api/user", productRouter);
 
 
 

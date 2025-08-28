@@ -59,7 +59,15 @@ const loginRequest = async (req, res) => {
         return res.status(400).json({success: false, message: "Password does not matched"});
     }
 
-    res.status(200).json({success: true, message: `Welcome To ${isMatch.username}`});
+    // Generated jwt token
+    const token = jwt.sign(
+        {userId: isMatch._id, email: isMatch.email},
+        process.env.SECRET_JWT,
+        {expiresIn: "45m"}
+    );
+    
+
+    res.status(200).json({success: true, message: `Welcome To ${isMatch.username}`, token});
 
 };
 
