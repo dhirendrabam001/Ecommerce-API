@@ -1,4 +1,5 @@
 const express = require("express");
+const checkToken = require("../Middleware/Auth");
 const {
   productRequest,
   getAllProduct,
@@ -8,8 +9,8 @@ const {
 } = require("../controllers/productController");
 const Router = express.Router();
 
-Router.post("/add", productRequest);
-Router.get("/getAll", getAllProduct);
+Router.post("/add", checkToken, productRequest);
+Router.get("/getAll", checkToken, getAllProduct);
 Router.get("/findbyuser/:id", getById);
 Router.put("/update/:id", updateProduct);
 Router.delete("/delete/:id", deleteProduct);
