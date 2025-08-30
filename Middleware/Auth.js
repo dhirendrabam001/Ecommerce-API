@@ -1,5 +1,6 @@
 const jwt = require("jsonwebtoken");
-const productModel = require("../Models/product");
+const { registerModel } = require("../Models/user");
+const authControllers = require("../controllers/authControllers");
 const checkToken = async (req, res, next) => {
   try {
     const token = req.header("Authorized");
@@ -9,8 +10,13 @@ const checkToken = async (req, res, next) => {
         .json({ success: false, message: "Token is not verify" });
     }
     const decoded = jwt.verify(token, process.env.SECRET_JWT);
+    console.log(decoded);
+
     const id = decoded.userId;
-    const user = await productModel.findById(id);
+    console.log("user id:", id);
+    const user = await registerModel.findById(id);
+    console.log("user id:", user);
+
     if (!user) {
       return res.status({ success: false, message: "User does not found" });
     }
