@@ -10,12 +10,10 @@ const checkToken = async (req, res, next) => {
         .json({ success: false, message: "Token is not verify" });
     }
     const decoded = jwt.verify(token, process.env.SECRET_JWT);
-    console.log(decoded);
 
     const id = decoded.userId;
-    console.log("user id:", id);
+
     const user = await registerModel.findById(id);
-    console.log("user id:", user);
 
     if (!user) {
       return res.status({ success: false, message: "User does not found" });
